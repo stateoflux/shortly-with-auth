@@ -1,6 +1,8 @@
 <h2>Your Links</h2>
+<label for="search">Search</label>
+<input type="search" ng-model="query">
 <ul>
-  <li ng-repeat="link in links | orderBy:'visits':true">
+  <li ng-repeat="link in links | orderBy:'visits':true | filter:query">
     <h4>{{ link.title }}</h4>
     <a ng-href="{{link.base_url }}/{{link.code}}">{{link.base_url }}/{{link.code}}</a>
     <p>Number of clicks {{ link.visits }}</p>
