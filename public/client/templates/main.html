@@ -1,8 +1,13 @@
 <h2>Your Links</h2>
 <label for="search">Search</label>
 <input type="search" ng-model="query">
+<div>
+  <a href="" ng-click="predicate='updated_at'">Latest visit time</a>
+  <a href="" ng-click="predicate='created_at'">Latest creation time</a>
+  <a href="" ng-click="predicate='visits'">Most visted</a>
+</div>
 <ul>
-  <li ng-repeat="link in links | orderBy:'visits':true | filter:query">
+  <li class="link" ng-repeat="link in links | orderBy:predicate:true | filter:query">
     <h4>{{ link.title }}</h4>
     <a ng-href="{{link.base_url }}/{{link.code}}">{{link.base_url }}/{{link.code}}</a>
     <p>Number of clicks {{ link.visits }}</p>

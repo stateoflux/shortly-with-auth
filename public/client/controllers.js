@@ -13,14 +13,17 @@ angular.module('shortlyApp.controllers', [])
 })
 .controller('ShortenController', function($scope, $http) {
   $scope.createLink = function() {
-    $http({
-      method: 'POST',
-      url: '/links',
-      data: JSON.stringify({ url: this.url })
-    })
-    .then(function(data) {
-      console.log('post request for links is complete');
-    });
+    console.log(this.linkForm.url.$valid);
+    if (this.linkForm.url.$valid) {
+      $http({
+        method: 'POST',
+        url: '/links',
+        data: JSON.stringify({ url: this.url })
+      })
+      .then(function(data) {
+        console.log('post request for links is complete');
+      });
+    }
     this.url = '';
   };
 });

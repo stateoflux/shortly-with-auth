@@ -100,9 +100,8 @@ form {
 form input[type=text], form input[type=password] {
   width: 360px;
   display: block;
-  font-size: 13px;
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 4px;
+  margin-bottom: 8px;
 }
 
 .error {
@@ -130,4 +129,11 @@ form input[type=text], form input[type=password] {
 
 .creator .message {
   clear: both;
+}
+
+input.ng-invalid {
+  border: 2px solid red;
+}
+input.ng-valid {
+  border: 2px solid green;
 }

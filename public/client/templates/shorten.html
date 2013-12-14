@@ -1,6 +1,9 @@
 <h1>Create A Short Link</h1>
-<form class="creator" ng-submit="createLink()">
-  <input class="text" type="text" ng-model="url" placeholder="http://www.example.com...">
-  <input type="submit" value="submit">
+<form class="creator" novalidate name="linkForm" ng-submit="createLink()">
+  <input 
+    size=80 class="text" type="url" name="url" ng-model="url" 
+    required placeholder="http://www.example.com...">
+  <input ng-disabled="linkForm.$invalid" type="submit" value="submit">
 </form>
-<div>{{url}}</div>
+<!-- <span class="error" ng-show="linkForm.url.$dirty && linkForm.url.$error.required">Required!</span> -->
+<!-- <span class="error" ng-show="linkForm.url.$dirty && linkForm.url.$error.url">Invalid URL format!</span> -->
