@@ -159,8 +159,6 @@ end
 post '/links' do
     data = JSON.parse request.body.read
     uri = URI(data['url'])
-    puts data
-    puts uri.absolute?
     raise Sinatra::NotFound unless uri.absolute?
     link = Link.find_by_url(uri.to_s) ||
            Link.create( url: uri.to_s, title: get_url_title(uri) )

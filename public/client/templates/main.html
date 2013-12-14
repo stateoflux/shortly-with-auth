@@ -1,0 +1,8 @@
+<h2>Your Links</h2>
+<ul>
+  <li ng-repeat="link in links | orderBy:'visits':true">
+    <h4>{{ link.title }}</h4>
+    <a ng-href="{{link.base_url }}/{{link.code}}">{{link.base_url }}/{{link.code}}</a>
+    <p>Number of clicks {{ link.visits }}</p>
+  </li> 
+</ul>
