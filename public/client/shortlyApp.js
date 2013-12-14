@@ -1,10 +1,21 @@
-var app = angular.module('shortlyApp', []);
+// array houses the dependencies necessary to for the app to run
+'use strict';
 
-app.run(function($rootScope) {
-});
-
-app.controller('PlayerController', ['$scope', function($scope) {
-}])
-
-app.controller('RelatedController', ['$scope', function($scope) {
-}])
+angular.module('shortlyApp', [
+  'ngRoute',
+  'shortlyApp.controllers'
+  ])  // setter
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: './client/templates/main.html',
+        controller: 'MainController'
+      })
+      .when('/shorten', {
+        templateUrl: './client/templates/shorten.html',
+        controller: 'ShortenController'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
+  });
