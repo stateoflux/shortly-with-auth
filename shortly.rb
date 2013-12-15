@@ -88,47 +88,49 @@ get '/' do
     File.read(File.join('public', 'index.html'))
 end
 
-get '/login' do
-    erb :login
-end
+# get '/login' do
+#    erb :login
+# end
 
-post '/login' do
-    user = User.find_by_username(params[:username])
-    if user.nil?
-        redirect '/signup'
-    else
-        session[:identifier] = user.identifier if user.authenticate(params[:password])
-        redirect '/'
-    end
-end
+# post '/login' do
+#     user = User.find_by_username(params[:username])
+#     if user.nil?
+#         redirect '/signup'
+#     else
+#         session[:identifier] = user.identifier if user.authenticate(params[:password])
+#         redirect '/'
+#     end
+# end
 
 post '/api/login' do
     user = User.find_by_username(params[:username])
     if user.nil?
         [401, {error: 'Unknown user'}.to_json]
+            puts "cannot find user"
     else
         if user.authenticate(params[:password])
             [200, {token: user.identifier}.to_json]
         else
+            puts "fails to authenticate"
             [401, {error: 'Bad login'}.to_json]
         end
     end
 end
 
-get '/signup' do
-    erb :signup
-end
+# get '/signup' do
+#     erb :signup
+# end
 
-post '/signup' do
-    user = User.find_by_username(params[:username])
-    unless user.nil?
-        redirect '/login'
-    else
-        user = User.create username: params[:username], password: params[:password]
-        session[:identifier] = user.identifier if user.valid?
-        redirect '/'
-    end
-end
+# post '/signup' do
+#     user = User.find_by_username(params[:username])
+#    unless user.nil?
+#       redirect '/login'
+#    else
+#        user = User.create username: params[:username], password: params[:password]
+#        session[:identifier] = user.identifier if user.valid?
+#        redirect '/'
+#    end
+#end
 
 post '/api/signup' do
     user = User.find_by_username(params[:username])
