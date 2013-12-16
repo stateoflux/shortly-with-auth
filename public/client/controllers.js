@@ -1,33 +1,24 @@
 'use strict';
 
-angular.module('shortlyApp.controllers', [])
-  .controller('LinksController', function($scope, $rootScope, $http, $location) {  // injecting the $http service
+angular.module('shortlyApp.controllers', ['shortlyApp.services'])
+  .controller('LinksController', function($scope, $rootScope, $http, $location, LinkService) {  // injecting the $http service
     // redirect to login if user has not logged in yet.
     if (!$rootScope.loggedIn) {
       $location.path('/login');
     } else {
-      $http({
-        method: 'GET',
-        url: '/links'
-      })
-      .then(function(data) {
-        console.log(data);
-        $scope.links = data.data;
-      });
+      LinkService.getLinks()
+        .then(function(data) {
+          $scope.links = data;
+        });
     }
   })
-  .controller('ShortenController', function($scope, $http) {
+  .controller('ShortenController', function($scope, $http, LinkService) {
     $scope.createLink = function() {
-      console.log(this.linkForm.url.$valid);
       if (this.linkForm.url.$valid) {
-        $http({
-          method: 'POST',
-          url: '/links',
-          data: JSON.stringify({ url: this.url })
-        })
-        .then(function(data) {
-          console.log('post request for links is complete');
-        });
+        LinkService.createLink(this.url)
+          .then(function(data) {
+            console.log('post request for links is complete');
+          })
       }
       this.url = '';
     };
