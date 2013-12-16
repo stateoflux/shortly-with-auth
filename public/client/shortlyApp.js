@@ -27,3 +27,11 @@ angular.module('shortlyApp', [
         redirectTo: '/'
       });
   });
+  // .run(function($rootScope) {
+  //   $rootScope.$on(‘$routeChangeStart’, function(evt, nextUrl, currentUrl) {
+  //     if (nextUrl.$$route.controller !== ‘LoginController’
+  //     && Session.isLoggedin) {
+  //       console.log(“Check Auth”);
+  //       // redirect to login?
+  //     }
+  //   }) 
